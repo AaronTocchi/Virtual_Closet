@@ -103,8 +103,7 @@ module.exports = function (app) {
     .post(geoURL)
     .then(function (res) {
       console.log(res.data)
-      var APIkey = "278e7c59c20443319e9bda7b8a280900";
-      var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${APIkey}`;
+      var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${process.env.DB_API}`;
       return axios.get(queryURL);
     }).then(function (res) {
       console.log(res.data.data[0])
