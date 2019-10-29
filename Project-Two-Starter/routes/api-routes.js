@@ -1,10 +1,11 @@
 var {Users, Accessories, Bottoms, Shoes, Tops} = require("../models");
 var axios = require("axios")
 var passport = require("../config/passport");
-
+var axios = require("axios");
 module.exports = function (app) {
-
-  // email part
+  // Using the passport.authenticate middleware with our local strategy.
+  // If the user has valid login credentials, send them to the members page.
+  // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     res.json(req.user);
   });
@@ -49,6 +50,12 @@ module.exports = function (app) {
       res.json(results)
     })
   })
+  app.post("/api/shoes", function (req, res) {
+    db.Shoes.create(req.body).then(function (dbShoe) {
+      res.json(dbShoe);
+    });
+
+  });
 
   // tops
   app.get("/api/tops", function (req, res) {
@@ -57,6 +64,12 @@ module.exports = function (app) {
     })
   })
 
+  app.post("/api/tops", function (req, res) {
+    db.Tops.create(req.body).then(function (dbTop) {
+      res.json(dbTop)
+    });
+  });
+
   // bottoms
   app.get("/api/bottoms", function (req, res) {
     Bottoms.findAll({}).then(function (results) {
@@ -64,12 +77,27 @@ module.exports = function (app) {
     })
   })
 
+  app.post("/api/bottoms", function (req, res) {
+    db.Bottoms.create(req.body).then(function (dbBottom) {
+      res.json(dbBottom);
+    });
+  });
+
 
   // accessories
   app.get("/api/accessories", function (req, res) {
     Accessories.findAll({}).then(function (results) {
       res.json(results)
     })
+  })
+  app.post("/api/accesories", function (req, res) {
+    db.Accesories.create(req.body).then(function (dbAccesory) {
+      res.json(dbAccesory)
+    });
+  });
+  // by color
+  app.get("/api/color", function (req,res){
+
   })
 
   // TODO: Front end, on page load, needs to make $.get request to this route
