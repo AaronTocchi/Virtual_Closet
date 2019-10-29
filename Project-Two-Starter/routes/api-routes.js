@@ -1,7 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
-
+var axios = require("axios");
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -58,6 +58,7 @@ module.exports = function (app) {
     });
 
   });
+
   // tops
   app.get("/api/tops", function (req, res) {
     db.Tops.findAll({}).then(function (results) {
@@ -69,6 +70,7 @@ module.exports = function (app) {
       res.json(dbTop)
     });
   });
+
   // bottoms
   app.get("/api/bottoms", function (req, res) {
     db.Bottoms.findAll({}).then(function (results) {
@@ -80,6 +82,7 @@ module.exports = function (app) {
       res.json(dbBottom);
     });
   });
+
   // accessories
   app.get("/api/accessories", function (req, res) {
     db.Accessories.findAll({}).then(function (results) {
@@ -91,6 +94,28 @@ module.exports = function (app) {
       res.json(dbAccesory)
     });
   });
+  // by color
+  app.get("/api/color", function (req,res){
+
+  })
+  var geoURL = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCYE9Fqg83eLXcEZJF7KmC40Sl6DIVvMKA';
+  axios
+    .post(geoURL)
+    .then(function (res) {
+      console.log(res.data)
+      var APIkey = "278e7c59c20443319e9bda7b8a280900";
+      var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${APIkey}`;
+      return axios.get(queryURL);
+    }).then(function (res) {
+      console.log(res.data.data[0])
+    }).catch(err => {
+      console.log(err);
+    });
+
+
+
+
+
 
 
 };

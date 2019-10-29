@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       bottom_temp: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       bottom_waterProof: {
