@@ -105,7 +105,7 @@ module.exports = function (app) {
     // On page load, axios request to weather URL
 
     // Geolocation
-    var geoURL = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCYE9Fqg83eLXcEZJF7KmC40Sl6DIVvMKA';
+    var geoURL = `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GEO_API}`;
 
 
     // get weather based on geolocation
@@ -113,8 +113,7 @@ module.exports = function (app) {
       .post(geoURL)
       .then(function (res) {
 
-        var APIkey = "278e7c59c20443319e9bda7b8a280900";
-        var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${APIkey}`;
+        var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${process.env.DB_API}`;
 
         return axios.get(queryURL);
       }).then(async function (res) {
@@ -163,17 +162,18 @@ async function getTodaysWardrob(temp) {
     var clothObj = {};
     for (var i = 0; i < tableNames.length; i++) {
       var type = await tableNames[i].findAll({ where: { temp } })
-      console.log(`\nTEST ${i}:\n`, test)
+      console.log(`\nTEST ${i}:\n`, type)
     }
 
     if (type.length) {
       clothObj = {
-        Accessories,
-        Bottoms,
-        Shoes,
-        Tops,
+        Accessories:
+        Bottoms:
+        Shoes:
+        Tops:
       }
     }
+    console.log(clothObj)
     
 
 
