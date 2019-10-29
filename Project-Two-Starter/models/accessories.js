@@ -1,29 +1,32 @@
 module.exports = function(sequelize, DataTypes) {
     var Accessories = sequelize.define("Accessories", {
-      accessory_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      accessory_color: {
+      color: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         }
       },
-      accessory_temp: {
-        type: DataTypes.INTEGER,
+      temp: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      accessory_waterProof: {
+      waterProof: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false
       }
-    });
+    },
+    {
+        timestamps: false
+      });
   
     return Accessories;
   };

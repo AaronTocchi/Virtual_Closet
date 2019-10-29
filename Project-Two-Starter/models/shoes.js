@@ -1,29 +1,34 @@
 module.exports = function(sequelize, DataTypes) {
     var Shoes = sequelize.define("Shoes", {
-      shoe_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      shoe_color: {
+      color: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         }
       },
-      shoe_temp: {
-        type: DataTypes.INTEGER,
+      temp: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      shoe_waterProof: {
+      waterProof: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false
-      }
+      },
+    },
+    {
+      timestamps: false
     });
-  
+    
+
+
     return Shoes;
   };
