@@ -46,4 +46,29 @@ module.exports = function(app) {
       });
     }
   });
+app.post("/api/shoes", function(req,res){
+  db.Shoes.create(req.body).then(function(dbShoe) {
+    res.json(dbShoe);
+  });
+    
+});
+
+app.post("api/bottoms", function(req,res){
+  db.Bottoms.create(req.body).then(function(dbBottom) {
+    res.json(dbBottom);
+  });
+});
+
+app.post("api/tops", function(req,res){
+  db.Tops.create(req.body).then(function(dbTop) {
+    res.json(dbTop)
+  });
+});
+
+app.post("api/accesories", function(req,res){
+  db.Accesories.create(req.body).then(function(dbAccesory) {
+    res.json(dbAccesory)
+  });
+});
+
 };
