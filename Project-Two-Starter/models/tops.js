@@ -1,28 +1,31 @@
 module.exports = function(sequelize, DataTypes) {
     var Tops = sequelize.define("Tops", {
-      top_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      top_color: {
+      color: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         }
       },
-      top_temp: {
+      temp: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      top_waterProof: {
+      waterProof: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false
       }
+    },
+    {
+      timestamps: false
     });
   
     return Tops;

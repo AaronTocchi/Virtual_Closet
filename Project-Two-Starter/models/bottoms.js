@@ -1,28 +1,31 @@
 module.exports = function(sequelize, DataTypes) {
     var Bottoms = sequelize.define("Bottoms", {
-      bottom_name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      bottom_color: {
+      color: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         }
       },
-      bottom_temp: {
+      temp: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      bottom_waterProof: {
+      waterProof: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false
       }
+    },
+    {
+      timestamps: false
     });
   
     return Bottoms;

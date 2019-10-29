@@ -1,5 +1,5 @@
-// Requiring our models and passport as we've configured it
-var db = require("../models");
+var {Users, Accessories, Bottoms, Shoes, Tops} = require("../models");
+var axios = require("axios")
 var passport = require("../config/passport");
 var axios = require("axios");
 module.exports = function (app) {
@@ -10,11 +10,8 @@ module.exports = function (app) {
     res.json(req.user);
   });
 
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
   app.post("/api/signup", function (req, res) {
-    db.User.create({
+    User.create({
       email: req.body.email,
       password: req.body.password
     })
@@ -26,29 +23,30 @@ module.exports = function (app) {
       });
   });
 
-  // Route for logging user out
   app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
 
-  // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function (req, res) {
     if (!req.user) {
-      // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
         id: req.user.id
       });
     }
   });
+
+
+
+
+  // closet part
+
   // shoes
   app.get("/api/shoes", function (req, res) {
-    db.Shoes.findAll({}).then(function (results) {
+    Shoes.findAll({}).then(function (results) {
       res.json(results)
     })
   })
@@ -61,10 +59,11 @@ module.exports = function (app) {
 
   // tops
   app.get("/api/tops", function (req, res) {
-    db.Tops.findAll({}).then(function (results) {
+    Tops.findAll({}).then(function (results) {
       res.json(results)
     })
   })
+
   app.post("/api/tops", function (req, res) {
     db.Tops.create(req.body).then(function (dbTop) {
       res.json(dbTop)
@@ -73,19 +72,21 @@ module.exports = function (app) {
 
   // bottoms
   app.get("/api/bottoms", function (req, res) {
-    db.Bottoms.findAll({}).then(function (results) {
+    Bottoms.findAll({}).then(function (results) {
       res.json(results)
     })
   })
+
   app.post("/api/bottoms", function (req, res) {
     db.Bottoms.create(req.body).then(function (dbBottom) {
       res.json(dbBottom);
     });
   });
 
+
   // accessories
   app.get("/api/accessories", function (req, res) {
-    db.Accessories.findAll({}).then(function (results) {
+    Accessories.findAll({}).then(function (results) {
       res.json(results)
     })
   })
@@ -98,23 +99,87 @@ module.exports = function (app) {
   app.get("/api/color", function (req,res){
 
   })
-  var geoURL = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCYE9Fqg83eLXcEZJF7KmC40Sl6DIVvMKA';
-  axios
-    .post(geoURL)
-    .then(function (res) {
-      console.log(res.data)
-      var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${process.env.DB_API}`;
-      return axios.get(queryURL);
-    }).then(function (res) {
-      console.log(res.data.data[0])
-    }).catch(err => {
-      console.log(err);
-    });
+
+  // TODO: Front end, on page load, needs to make $.get request to this route
+  app.get("/api/weather", function (req, res) {
+    // On page load, axios request to weather URL
+
+    // Geolocation
+    var geoURL = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCYE9Fqg83eLXcEZJF7KmC40Sl6DIVvMKA';
 
 
+    // get weather based on geolocation
+    axios
+      .post(geoURL)
+      .then(function (res) {
+
+        var APIkey = "278e7c59c20443319e9bda7b8a280900";
+        var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${APIkey}`;
+
+        return axios.get(queryURL);
+      }).then(async function (res) {
+        //  THEN, based on today's weather
+        var temp = res.data.data[0].temp;
+        var precip = res.data.data[0].precip;
+        // If warm, findAll clothing that is classified as warm and send to front end
+        if (temp > 60) {
+
+          console.log("warm")
+          const todaysWardrobe = getTodaysWardrob("warm")
+
+          
+
+
+
+          // else if cold, findAll clothing that is classidied as cold and send to front end
+        } else {
+          console.log("cold")
+
+        };
+        // if (precip > 0) {
+        //   console.log(true)
+        // } else {
+        //   console.log(false)
+        // };
+
+        // 
+
+
+      }).catch(err => {
+        console.log(err);
+      });
+  })
 
 
 
 
 
 };
+
+
+async function getTodaysWardrob(temp) {
+  try {
+    const tableNames = [Accessories, Bottoms, Shoes, Tops];
+    var clothObj = {};
+    for (var i = 0; i < tableNames.length; i++) {
+      var type = await tableNames[i].findAll({ where: { temp } })
+      console.log(`\nTEST ${i}:\n`, test)
+    }
+
+    if (type.length) {
+      clothObj = {
+        Accessories,
+        Bottoms,
+        Shoes,
+        Tops,
+      }
+    }
+    
+
+
+
+  } catch (err) {
+    console.log(err)
+  }
+
+}
