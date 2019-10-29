@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       shoe_temp: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       shoe_waterProof: {
