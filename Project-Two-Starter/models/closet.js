@@ -1,10 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
-    var Tops = sequelize.define("Tops", {
+    var Closets = sequelize.define("Closets", {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
+        }
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [1]
         }
       },
       color: {
@@ -27,6 +34,10 @@ module.exports = function(sequelize, DataTypes) {
     {
       timestamps: false
     });
+
+    Closets.associate = function (models) {
+      models.Closets.belongsTo(models.User)
+    }
   
-    return Tops;
+    return Closets;
   };
