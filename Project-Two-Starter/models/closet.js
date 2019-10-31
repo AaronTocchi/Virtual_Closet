@@ -1,29 +1,43 @@
 module.exports = function(sequelize, DataTypes) {
-    var Tops = sequelize.define("Tops", {
-      top_name: {
+    var Closets = sequelize.define("Closets", {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      top_color: {
+      type: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1]
         }
       },
-      top_temp: {
+      color: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
+      },
+      temp: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      top_waterProof: {
+      waterProof: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: false
       }
+    },
+    {
+      timestamps: false
     });
+
+    Closets.associate = function (models) {
+      models.Closets.belongsTo(models.User)
+    }
   
-    return Tops;
+    return Closets;
   };
