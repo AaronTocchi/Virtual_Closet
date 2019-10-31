@@ -4,12 +4,13 @@ var passport = require("../config/passport");
 var axios = require("axios");
 var Sequelize = require("Sequelize")
 var Op = Sequelize.Op;
+
 module.exports = function (app) {
 
     // email login
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
        console.log("hit route");
-        res.json(req.user);
+        res.json(user = req.user);
         
     });
 
@@ -44,9 +45,12 @@ module.exports = function (app) {
 
 
     // closet part
+    
+
 
     // crete new clothes and put in the closet
     app.post("/api/closet", function (req, res) {
+        console.log(req.body)
         Closets.create(req.body).then(function (newClothes) {
             res.json(newClothes);
         });
