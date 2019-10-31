@@ -24,9 +24,10 @@ module.exports = function (sequelize, DataTypes) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
 
+  // Will add userId to Closet model
   User.associate = function(models) {
-    User.hasMany(models.Closets, {
-      onDelete: "cascade"
+    User.hasMany(models.Closets, {foreignKey: 'userId',
+     onDelete: "cascade"
     });
   };
 
