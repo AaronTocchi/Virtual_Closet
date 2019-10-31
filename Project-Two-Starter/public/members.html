@@ -2,34 +2,143 @@
 <html lang="en">
 
 <head>
-  <title>Passport Authentication</title>
+  <title>Virtual Closet</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="stylesheets/style.css" rel="stylesheet">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
-  </div>
-</nav>
-  <div class="container">
+  <header>
+    <nav>
+      <div class="nav-wrapper blue darken-2">
+        <a href="#" class="brand-logo center">The Virtual Closet</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
+      <div class="col s4">
+        <div>
+           <div class="row">
+             <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s10">
+                    <input placeholder="" id="first_name" type="text" class="validate">
+                      <label for="first_name">Name/Brand</label>
+                   </div>
+                </div>
+                    <div class="row">
+                      <div class="input-field col s10">
+                        <a class='dropdown-trigger btn grey-text' href='#' data-target='dropdown1'>Choose Type</a>
+                          <ul id='dropdown1' class='dropdown-content'>
+                            <li><a href="#!">Shoes</a></li>
+                            <li><a href="#!">Bottoms</a></li>
+                            <li><a href="#!">Tops</a></li>
+                            <li><a href="#!">Accessories</a></li>
+                          </ul>
+                      </div>
+                   </div>
+                      <div class="row">
+                         <div class="input-field col s10">
+                          <a class='dropdown-trigger btn grey-text' href='#' data-target='dropdown2'>Choose Color</a>
+                            <ul id='dropdown2' class='dropdown-content'>
+                              <li><a href="#!">Blue</a></li>
+                              <li><a href="#!">Green</a></li>
+                              <li><a href="#!">Black</a></li>
+                              <li><a href="#!">Purple</a></li>
+                              <li><a href="#!">Brown</a></li>
+                              <li><a href="#!">Yellow</a></li>
+                              <li><a href="#!">White</a></li>
+                              <li><a href="#!">Red</a></li>
+                              <li><a href="#!">Orange</a></li>
+                              <li><a href="#!">Pink</a></li>
+                              <li><a href="#!">Grey</a></li>
+                            </ul>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s10">
+                          <a class='dropdown-trigger btn grey-text' href='#' data-target='dropdown3'>Choose Weather</a>
+                            <ul id='dropdown3' class='dropdown-content'>
+                              <li><a href="#!">Warm</a></li>
+                              <li><a href="#!">Hot</a></li>
+                              <li><a href="#!">Cold</a></li>
+                            </ul>
+                         </div>
+                       </div>
+  
+                          <form action="#">
+                              <p>
+                                <label>
+                                  <input type="checkbox" class="filled-in" />
+                                  <span>WaterProof</span>
+                                </label>
+                              </p>
+                            </form>   
+                  </form>
+                </div>
+          </div>
+        </div>
+          
+        <div class="col s4"><h4>Build Outfit</h4></div>
+        <div class="col s4">
+          <div>
+              <table>
+                  <thead>
+                    <tr>
+                        <th>Bottom</th>
+                        <th>Top</th>
+                        <th>Shoes</th>
+                        <th>Accessories</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+        
+      </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/members.js"></script>
-
+  
 </body>
-
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script> $('.dropdown-trigger').dropdown();</script>
 </html>
