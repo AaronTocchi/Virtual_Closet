@@ -5,12 +5,14 @@ $(document).ready(function () {
     var colorChoice = $("input#color-input");
     var tempChoice = $("input#temp-input");
     var waterProofCheck = $("input#waterProof-input");
-    var userID = JSON.parse(localStorage.getItem("userID"));
-    console.log(userID);
-
+    
     addClotheForm.on("submit", function (event) {
-    console.log("boop");
         event.preventDefault();
+        var userID = JSON.parse(localStorage.getItem("userID"));
+        console.log("Page loaded with userID: ", userID);
+        console.log("boop");
+        
+        
         var clothes = {
             //add in userID
             name: nameInput.val().trim(),
@@ -18,29 +20,33 @@ $(document).ready(function () {
             color: colorChoice.val(),
             temp: tempChoice.val(),
             waterProof: waterProofCheck.val(),
-            UserId: userID
+            userId: userID
         };
-
+        console.log(clothes)
         if (!clothes.name || !clothes.type || !clothes.color || !clothes.temp || !clothes.waterProof) {
             return;
         }
-        // If we have all the clothing info run the createClothing function
-        createClothing(clothes.name,clothes.type,clothes.color,clothes.temp,clothes.waterProof, clothes.UserId);
+        // // If we have all the clothing info run the createClothing function
+        createClothing(clothes.name,clothes.type,clothes.color,clothes.temp,clothes.waterProof, clothes.userId);
         nameInput.val("");
         typeChoice.val("");
         colorChoice.val("");
         tempChoice.val("");
         waterProofCheck.val("");
-        userID.val("")
+        userID.val("");
+        console.log("Cleared userID: ", userID);
+        
     });
-    function createClothing(name, type, color, temp, waterProof, UserId) {
+    
+    function createClothing(name, type, color, temp, waterProof, userId) {
+        console.log("Inside post request")
         $.post("/api/closet", {
            name,
            type,
            color,
            temp,
            waterProof,
-           UserId: userID
+           userId
         })
             .then(function (data) {
                 console.log(data);

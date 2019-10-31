@@ -4,6 +4,7 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     let userID = data.id;
     localStorage.setItem("userID",JSON.stringify(userID));
+    // JSON.parse(localStorage.getItem("userID"));
     $(".member-name").text(data.email);
   });
 });
