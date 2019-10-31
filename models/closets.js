@@ -35,8 +35,11 @@ module.exports = function(sequelize, DataTypes) {
       timestamps: false
     });
 
+    // WIll also add userId to Closet model
     Closets.associate = function (models) {
-      models.Closets.belongsTo(models.User)
+      models.Closets.belongsTo(models.User, {
+        foreignKey: 'userId'
+      })
     }
   
     return Closets;

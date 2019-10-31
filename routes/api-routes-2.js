@@ -8,7 +8,9 @@ module.exports = function (app) {
 
     // email login
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
+       console.log("hit route");
         res.json(req.user);
+        
     });
 
     app.post("/api/signup", function (req, res) {
