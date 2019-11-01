@@ -1,8 +1,55 @@
-.container-1 {
-  margin: auto;
-  width: 750px;
+
+/* index */
+
+body {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 3%;
 }
 
-.container-3 {
-  margin: auto;
+.header {
+  text-align: center;
 }
+
+/* top panel */ 
+.top-panel {
+  display: flex;
+}
+
+
+
+/* left panel */
+.right-panel {
+  flex: 1
+}
+
+
+
+/* right panel */
+.right-panel {
+  flex: 2
+}
+
+
+.all {
+  width: 100%;
+  text-align: center;
+}
+
+
+.closetHead {
+  text-align: center;
+}
+
+
+
+/* center panel */ 
+.center-panel {
+  width: 100%;
+  margin-top: 10vh;
+}
+
+.sorting {
+  text-align: center;
+}
+

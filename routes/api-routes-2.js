@@ -4,17 +4,20 @@ var passport = require("../config/passport");
 var axios = require("axios");
 var Sequelize = require("Sequelize")
 var Op = Sequelize.Op;
+
 module.exports = function (app) {
 
     // email login
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
        console.log("hit route");
-        res.json(req.user);
+        res.json(user = req.user);
         
     });
-
-    app.post("/api/signup", function (req, res) {
+     // "/api/signup"
+    app.post("/api/signup",function (req, res) {
+        console.log("Inside api/signup", req.body)
         User.create({
+            name: req.body.name,
             email: req.body.email,
             password: req.body.password
         })
@@ -36,6 +39,7 @@ module.exports = function (app) {
             res.json({});
         } else {
             res.json({
+                name: req.user.name,
                 email: req.user.email,
                 id: req.user.id
             });
@@ -44,9 +48,12 @@ module.exports = function (app) {
 
 
     // closet part
+    
+
 
     // crete new clothes and put in the closet
     app.post("/api/closet", function (req, res) {
+        console.log(req.body)
         Closets.create(req.body).then(function (newClothes) {
             res.json(newClothes);
         });
