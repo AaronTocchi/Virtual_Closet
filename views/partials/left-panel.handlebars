@@ -1,7 +1,69 @@
-<div class="right-panel">
-  <h3>Left Panel</h3>
-  <h4>partial inside partial</h4>
-  <h5>
-    {{> alist}}
-  </h5>
+<div style='width:33%;float:left'>
+
+  <form class="addClothe">
+    <div class="row">
+      <div class="input-field col s10">
+        <input placeholder="" id="name-input" type="text" class="validate">
+        <label for="first_name">Name/Brand</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+    <select id='type-input'>
+      <option value="" disabled selected>Choose Type</option>
+      <option value="shoes">Shoes</option>
+      <option value="bottoms">Bottoms</option>
+      <option value="tops">Tops</option>
+     <option value="accesories">Accessories</option>
+    </select>
+    <label>Clothing Type</label>
+  </div>
+</div>
+    
+    <div class="row">
+      <div class="input-field col s12">
+    <select id='color-input'>
+      <option value="" disabled selected>Choose Color</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="black">Black</option>
+       <option value="purple">Purple</option>
+      <option value="brown">Brown</option>
+      <option value="yellow">Yellow</option>
+       <option value="white">White</option>
+      <option value="red">Red</option>
+      <option value="orange">Orange</option>
+     <option value="pink">Pink</option>
+     <option value="grey">Grey</option>
+
+    </select>
+    <label>Color</label>
+  </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+    <select id='temp-input'>
+      <option value="" disabled selected>Pick Optimal Wear Weather</option>
+      <option value="warm">Warm</option>
+      <option value="hot">Hot</option>
+      <option value="cold">Cold</option>
+    </select>
+    <label>Weather Wear</label>
+  </div>
+    </div>
+    <div class="row">
+<div class="input-field col s12">
+    <select id='waterProof-input'>
+      <option value="" disabled selected>Is it Water Proof?</option>
+      <option value="0">Yah I'd Wear it in the Rain</option>
+      <option value="1">Nope</option>
+    </select>
+    <label>Waterproof</label>
+  </div>
+    </div>
+    
+    <button type="submit" class="btn">Add Clothing</button>
+</div>
+  </form>
+
 </div>

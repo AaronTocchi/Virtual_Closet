@@ -13,9 +13,11 @@ module.exports = function (app) {
         res.json(user = req.user);
         
     });
-
-    app.post("/api/signup", function (req, res) {
+     // "/api/signup"
+    app.post("/api/signup",function (req, res) {
+        console.log("Inside api/signup", req.body)
         User.create({
+            name: req.body.name,
             email: req.body.email,
             password: req.body.password
         })
@@ -37,6 +39,7 @@ module.exports = function (app) {
             res.json({});
         } else {
             res.json({
+                name: req.user.name,
                 email: req.user.email,
                 id: req.user.id
             });

@@ -55,6 +55,9 @@ module.exports = function(app) {
         let data = {
           'right': {
             'closets': allClothes
+          },
+          'index': {
+            'email': req.user.name
           }
         }
         res.render("index", data);
