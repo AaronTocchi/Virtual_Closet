@@ -9,10 +9,6 @@ var passport = require("./config/passport");
 // Setting up port and requiring models for syncing
 var PORT = process.env.PORT || 8080;
 
-var db = require("./models");
-
-
-// Creating express app and configuring middleware needed for authentication
 var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,6 +17,11 @@ app.use(express.static("public"));
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+var db = require("./models");
+
+
+// Creating express app and configuring middleware needed for authentication
 
 var exphbs = require("express-handlebars");
 
