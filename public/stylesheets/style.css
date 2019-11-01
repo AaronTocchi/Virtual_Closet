@@ -113,7 +113,7 @@ body {
   font-family: 'McLaren', cursive;
   font-size: 5em;
   width: 100%;
-  color: #1F2154;
+  color: #103332;
   text-align: center;
 }
 
@@ -124,10 +124,40 @@ body {
 }
 
 
-
 /* left panel */
 .left-panel {
-  flex: 1
+  flex: 1;
+  margin-right: 15%;
+}
+
+.addMargin {
+  margin-top: 5vh;
+}
+
+.select-wrapper input.select-dropdown {
+  color: #103332 !important;
+  font-family: 'Raleway', sans-serif;
+}
+
+
+.dropdown-content li>span {
+  color: #103332 !important;
+  font-family: 'Raleway', sans-serif;
+}
+
+.select-wrapper input.select-dropdown:focus {
+  border-bottom: 1px solid #103332;
+}
+
+.addBtn {
+  margin: 0 auto;
+  background-color: #103332;
+  display: block;
+  justify-content: center;
+  font-size: 1.5em;
+  width: 80%;
+  height: 10vh;
+  font-family: 'McLaren', cursive;
 }
 
 
@@ -139,7 +169,7 @@ body {
 
 .closetHead {
   text-align: center;
-  color: #1F2154;
+  color: #103332;
   font-family: 'McLaren', cursive;
   font-size: 3em;
 }
@@ -155,7 +185,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight: bolder;
   font-size: 1.25em;
-  color: #1F2154;
+  color: #103332;
 }
 
 th, td {
