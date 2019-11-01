@@ -1,10 +1,11 @@
 $(document).ready(function () {
+    $('select').formSelect();
     var addClotheForm = $("form.addClothe");
-    var nameInput = $("input#name-input");
-    var typeChoice = $("input#type-input");
-    var colorChoice = $("input#color-input");
-    var tempChoice = $("input#temp-input");
-    var waterProofCheck = $("input#waterProof-input");
+    var nameInput = $("#name-input");
+    var typeChoice = $("#type-input");
+    var colorChoice = $("#color-input");
+    var tempChoice = $("#temp-input");
+    var waterProofCheck = $("#waterProof-input");
     
     addClotheForm.on("submit", function (event) {
         event.preventDefault();
@@ -15,7 +16,7 @@ $(document).ready(function () {
         
         var clothes = {
             //add in userID
-            name: nameInput.val().trim(),
+            name: nameInput.val(),
             type: typeChoice.val(),
             color: colorChoice.val(),
             temp: tempChoice.val(),
@@ -26,6 +27,8 @@ $(document).ready(function () {
         if (!clothes.name || !clothes.type || !clothes.color || !clothes.temp || !clothes.waterProof) {
             return;
         }
+        console.log("made it past")
+        
         // // If we have all the clothing info run the createClothing function
         createClothing(clothes.name,clothes.type,clothes.color,clothes.temp,clothes.waterProof, clothes.userId);
         nameInput.val("");
