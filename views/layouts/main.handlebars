@@ -38,9 +38,8 @@
 
     $bars.configure(templates).then(() => {
       $.get('/api/closet', function (data) {
-        let foo = $bars.render('closetList', { allClothes: data });
-        debugger;
-        $('#thecloset').html(foo);
+        let html = $bars.render('closetList', { allClothes: data });
+        $('#thecloset').html(html);
       });
     });
   });
