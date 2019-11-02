@@ -7,7 +7,17 @@
     Handlebars.templates = {};
 
     function render(name, data) {
-      return Handlebars.templates[name](data);
+      let parser = new DOMParser();
+      let html = Handlebars.templates[name](data);
+      let fragment;
+
+      if(html.indexOf('<template>') !== 0) {
+        html = `<template>${html}</template>`;
+      }
+
+      fragment = parser.parseFromString(html,'text/html');
+
+      return fragment.head.children[0].content.children[0];
     }
 
     function compileTemplates(templates) {
@@ -27,12 +37,12 @@
       return new Promise(async (resolve, reject) => {
         try {
           let text = await load(template.href);
-          let compiled = Handlebars.compile(text);
+          let compiled = Handlebars.compile(text.trim());
 
           if (template.partial !== 'only') {
             Handlebars.templates[template.name] = compiled;
           }
-          if (template.partial === 'yes' || template.partial === 'also') {
+          if (template.partial === 'also') {
             Handlebars.partials[template.name] = compiled;
           }
           resolve(Handlebars.templates[template.name])

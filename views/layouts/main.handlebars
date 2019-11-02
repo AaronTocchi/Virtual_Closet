@@ -35,8 +35,8 @@
 
     $bars.configure(templates).then(() => {
       $.get('/api/closet', function (data) {
-        let html = $bars.render('closetList', { allClothes: data });
-        $('#thecloset').html(html);
+        let fragment = $bars.render('closetList', { allClothes: data });
+        document.getElementById('thecloset').appendChild(fragment);
       });
     }).catch(error => {
       alert(error)
