@@ -42,13 +42,6 @@
         }
       });
     };
-    function createPlaceholder(id) {
-      let tag = document.createElement('script');
-
-      tag.setAttribute('id',id);
-      tag.setAttribute('type','text/x-handlebars-template');
-      return tag;
-    }
     function loader(href) {
       return new Promise((resolve, reject) => {
         if (fetch !== undefined) {
