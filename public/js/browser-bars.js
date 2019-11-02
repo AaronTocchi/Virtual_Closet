@@ -58,7 +58,7 @@
         return new Promise((resolve, reject) => {
           let request = new XMLHttpRequest();
           let responseText;
-          let text = (data) => {
+          let text = () => {
             return Promise.resolve(responseText);
           }
           request.onerror = function() {
