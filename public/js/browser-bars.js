@@ -13,20 +13,20 @@
     function compileTemplates(templates) {
       return new Promise((resolve, reject) => {
         let promises = templates.map(template => {
-          return loadFile(template);
+          return compileTemplate(template);
         });
         Promise.all(promises).then(result => {
           resolve(true);
-        }).catch(error => {``
+        }).catch(error => {
           reject(error);
         });
       })
     }
 
-    function loadFile(template) {
+    function compileTemplate(template) {
       return new Promise(async (resolve, reject) => {
         try {
-          let text = await loader(template.href);
+          let text = await load(template.href);
           let compiled = Handlebars.compile(text);
 
           if (template.partial !== 'only') {
@@ -38,41 +38,18 @@
           resolve(Handlebars.templates[template.name])
         } catch (error) {
           reject(error);
-        } finally {
-        }
+        } finally {}
       });
     };
-    function loader(href) {
-      return new Promise((resolve, reject) => {
-        if (fetch !== undefined) {
-          fetch(href).then(response => {
-            return response.text()
-          }).then(text => {
-            resolve(text);
-          }).catch(error => {
-            reject(error);
-          });
-        } else {
-          let request = new XMLHttpRequest();
 
-          request.onerror = function() {
-            reject(`error loading ${href}`);
-          }
-          request.onreadystatechange = function() {
-            if(this.readyState !== 4) {
-              return;
-            }
-            if (this.status / 100 !== 2) {
-              reject(`error ${this.status} loading ${href}`);
-              this.abort();
-            } else {
-              resolve(this.responseText);
-            }
-          };
-          request.open("GET", href);
-          request.send();
-        }
-      });
+    function load(href) {
+      return new Promise((resolve, reject) => {
+        fetch(href).then(response => {
+          return response.text();
+        }).then(text => {
+          resolve(text);
+        });
+      })
     }
   });
 })();
