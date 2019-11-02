@@ -6,6 +6,9 @@ $(document).ready(function () {
     var colorChoice = $("#color-input");
     var tempChoice = $("#temp-input");
     var waterProofCheck = $("#waterProof-input");
+    var typeSort = $("");
+    var colorSort = $("");
+    var weatherSort = $("");
     
     addClotheForm.on("submit", function (event) {
         event.preventDefault();
