@@ -28,15 +28,13 @@
       {
         href: 'hbs/closet-list.handlebars',
         name: 'closetList',
-        id: '#closet-list',
         partial: 'also'     // no, only, also, default no
       }
     ];
 
     $bars.configure(templates).then(() => {
       $.get('/api/closet', function (data) {
-        let fragment = $bars.render('closetList', { allClothes: data });
-        document.getElementById('thecloset').appendChild(fragment);
+        $bars.render('closetList', 'thecloset', { allClothes: data });
       });
     }).catch(error => {
       alert(error)
@@ -44,8 +42,6 @@
   });
 </script>
 
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script> $('.dropdown-trigger').dropdown(); </script>
 <script type="text/javascript" src="js/virtualCloset.js"></script>
