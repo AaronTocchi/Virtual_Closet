@@ -6,10 +6,13 @@
     }
     Handlebars.templates = {};
 
-    function render(name, data) {
+    function render(name, id, data) {
       let parser = new DOMParser();
       let html = Handlebars.templates[name](data);
       let fragment;
+      let rval;
+
+      data = data || id;
 
       if(html.indexOf('<template>') !== 0) {
         html = `<template>${html}</template>`;
@@ -17,7 +20,13 @@
 
       fragment = parser.parseFromString(html,'text/html');
 
-      return fragment.head.children[0].content.children[0];
+      rval = Array.from(fragment.head.children[0].content.children);
+      if(id && id.length) {
+        let element = document.getElementById(id);
+
+        rval.forEach(child => element.appendChild(child));
+      }
+      return rval;
     }
 
     function compileTemplates(templates) {
@@ -43,7 +52,8 @@
             Handlebars.templates[template.name] = compiled;
           }
           if (template.partial === 'also') {
-            Handlebars.partials[template.name] = compiled;
+            Handlebars.registerPartial(template.name, compiled);
+            // Handlebars.partials[template.name] = compiled;
           }
           resolve(Handlebars.templates[template.name])
         } catch (error) {
