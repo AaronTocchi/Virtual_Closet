@@ -64,7 +64,7 @@ module.exports = function (app) {
     // /api/closet?type=shoe&color=blue
     // by color and type
     app.get("/api/closet", function (req, res) {
-
+        console.log("req.query", req.query);
         let condition;
         // console.log('params',req.query)
         if (Object.keys(req.query).length === 0) {
@@ -177,4 +177,27 @@ module.exports = function (app) {
                 console.log(err);
             });
     })
+    
+    app.get("/api/type/:type", function (req,res) {
+        Closets.findAll({
+            where: {
+              type: req.params.type
+            }, include: [User]
+          }).then(function(results) {
+            res.json(results);
+          });
+    });
+   
+    app.get("/api/color/:color", function (req,res) {
+        console.log(req.params)
+        Closets.findAll({
+            where: {
+              color: req.params.color
+            }, include: [User]
+          }).then(function(results) {
+            res.json(results);
+          });
+    });
+
+
 };
