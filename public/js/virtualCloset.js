@@ -61,6 +61,20 @@ $(document).ready(function () {
             .catch(handleLoginErr);
     }
 
+    function sortByColor(color){
+        $.get("/api/color/"+ color, function(data){
+
+        })
+    }
+    
+    function sortByType(type){
+        $.get("/api/closet/"+ type, function(data){
+
+        })
+    }
+
+
+
     function handleLoginErr(err) {
         $("#alert .msg").text(err.responseJSON);
         $("#alert").fadeIn(500);

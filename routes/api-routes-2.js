@@ -177,4 +177,27 @@ module.exports = function (app) {
                 console.log(err);
             });
     })
+    
+    app.get("/api/closet/:type", function (req,res) {
+        Closets.findAll({
+            where: {
+              type: req.params.type
+            }, include: [User]
+          }).then(function(results) {
+            res.json(results);
+          });
+    });
+   
+    app.get("/api/color/:color", function (req,res) {
+        console.log(req.params)
+        Closets.findAll({
+            where: {
+              color: req.params.color
+            }, include: [User]
+          }).then(function(results) {
+            res.json(results);
+          });
+    });
+
+
 };
