@@ -6,9 +6,26 @@ $(document).ready(function () {
     var colorChoice = $("#color-input");
     var tempChoice = $("#temp-input");
     var waterProofCheck = $("#waterProof-input");
-    var typeSort = $("");
-    var colorSort = $("");
-    var weatherSort = $("");
+    var typeSort = $("#type-sort");
+    var colorSort = $("#color-sort");
+    var weatherSort = $("#weather-sort");
+    var sortClothe = $("form.sortClothe")
+ 
+     weatherSort.on("click", function (event){
+        event.preventDefault();
+        console.log("linked weather")
+    });
+   
+
+    colorSort.on("change", function (){
+        console.log($(this).val())
+    });
+
+    typeSort.on("change", function (){
+        console.log($(this).val())
+    });
+
+
     
     addClotheForm.on("submit", function (event) {
         event.preventDefault();
