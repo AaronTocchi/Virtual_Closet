@@ -10,7 +10,9 @@ $(document).ready(function () {
     var colorSort = $("#color-sort");
     var weatherSort = $("#weather-sort");
     var sortClothe = $("form.sortClothe")
- 
+    let typeSorted = document.getElementById("sort-type");
+    let colorSorted = document.getElementById("sort-color");
+        
      weatherSort.on("click", function (event){
         event.preventDefault();
         console.log("linked weather")
@@ -19,10 +21,14 @@ $(document).ready(function () {
 
     colorSort.on("change", function (){
         console.log($(this).val())
+        let color = $(this).val();
+        sortByColor(color);
     });
 
     typeSort.on("change", function (){
         console.log($(this).val())
+        let type = $(this).val();
+        sortByType(type);
     });
 
 
@@ -79,15 +85,39 @@ $(document).ready(function () {
     }
 
     function sortByColor(color){
-        $.get("/api/color/"+ color, function(data){
+        colorSorted.innerHTML = '';
+       if (colorSorted.classList.contains("display-none")) {
+        colorSorted.classList.remove("display-none");
+        typeSorted.classList.add("display-none");
+    } else {
 
-        })
+    }
+    //  else {
+    //     colorSorted.classList.add("display-none");
+    //     typeSorted.classList.remove("display-none");
+    // }
+    $.get('/api/color/' + color, function (data) {
+        console.log(data)
+              $bars.render('colorSort', 'sort-color', { allClothes: data });
+            });
+
+        
     }
     
     function sortByType(type){
-        $.get("/api/closet/"+ type, function(data){
-
-        })
+        typeSorted.innerHTML = '';
+        if (typeSorted.classList.contains("display-none")) {
+            typeSorted.classList.remove("display-none");
+            colorSorted.classList.add("display-none");
+        }
+        //  else {
+        //     typeSorted.classList.add("display-none");
+        //     colorSorted.classList.remove("display-none");
+        // }
+        $.get("/api/type/"+ type, function(data){
+            $bars.render('typeSort', 'sort-type', { allClothes: data });
+        });
+        
     }
 
 

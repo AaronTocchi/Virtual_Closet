@@ -221,3 +221,11 @@ th {
     display: block;
   }
 }
+
+/* .display {
+  display: block
+} */
+
+.display-none {
+  display: none !important;
+}

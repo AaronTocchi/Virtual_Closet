@@ -64,7 +64,7 @@ module.exports = function (app) {
     // /api/closet?type=shoe&color=blue
     // by color and type
     app.get("/api/closet", function (req, res) {
-
+        console.log("req.query", req.query);
         let condition;
         // console.log('params',req.query)
         if (Object.keys(req.query).length === 0) {
@@ -178,7 +178,7 @@ module.exports = function (app) {
             });
     })
     
-    app.get("/api/closet/:type", function (req,res) {
+    app.get("/api/type/:type", function (req,res) {
         Closets.findAll({
             where: {
               type: req.params.type

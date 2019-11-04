@@ -1,0 +1,18 @@
+<table class="all">
+    <thead>
+        <tr class="tableHead">
+            <th>Type</th>
+            <th>Name</th>
+            <th>Color</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#each this.allClothes}}
+    <tr>
+        <td>{{this.type}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.color}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+</table>
