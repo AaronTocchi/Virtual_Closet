@@ -9,13 +9,13 @@ $(document).ready(function () {
     var typeSort = $("#type-sort");
     var colorSort = $("#color-sort");
     var weatherSort = $("#weather-sort");
-    var sortClothe = $("form.sortClothe")
+    let weatherSorted = document.getElementById("sort-weather");
     let typeSorted = document.getElementById("sort-type");
     let colorSorted = document.getElementById("sort-color");
         
      weatherSort.on("click", function (event){
         event.preventDefault();
-        console.log("linked weather")
+        sortBYWeather();
     });
    
 
@@ -118,6 +118,13 @@ $(document).ready(function () {
             $bars.render('typeSort', 'sort-type', { allClothes: data });
         });
         
+    }
+
+    function sortBYWeather(){
+       weatherSorted.innerHTML = '';
+        $.get("/api/weather/", function(data){
+            $bars.render('weatherSort', 'sort-weather', { allClothes: data });
+        });
     }
 
 
