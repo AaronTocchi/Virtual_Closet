@@ -9,12 +9,12 @@ module.exports = function (app) {
 
     // email login
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
-       console.log("hit route");
+        console.log("hit route");
         res.json(user = req.user);
-        
+
     });
-     // "/api/signup"
-    app.post("/api/signup",function (req, res) {
+    // "/api/signup"
+    app.post("/api/signup", function (req, res) {
         console.log("Inside api/signup", req.body)
         User.create({
             name: req.body.name,
@@ -48,7 +48,7 @@ module.exports = function (app) {
 
 
     // closet part
-    
+
 
 
     // crete new clothes and put in the closet
@@ -107,9 +107,9 @@ module.exports = function (app) {
 
 
     // by weather
-    app.get("/api/closet/:weather/:waterproof", function (req, res) {
+    app.get("/api/weather", function (req, res) {
         // On page load, axios request to weather URL
-
+        console.log("HELLO YOU LINKED")
         // Geolocation
         var geoURL = `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GEO_API}`;
 
@@ -122,54 +122,62 @@ module.exports = function (app) {
                 var queryURL = `https://api.weatherbit.io/v2.0/current?lat=${res.data.location.lat}&lon=${res.data.location.lng}&units=I&key=${process.env.DB_API}`;
 
                 return axios.get(queryURL);
+
             }).then(function (response) {
                 //  by weather and waterproof
                 var temp = response.data.data[0].temp;
                 var precip = response.data.data[0].precip;
-                let condition
+                let condition;
+                console.log("temp:", temp)
+                console.log("precip:", precip)
 
                 if (temp > 60 && temp < 80 && precip < 40) {
                     condition = {
                         where: {
-                            [Op.and]: [{ temp: 'warm' }, { waterProof: 0 }]
+                            [Op.and]: [{ temp: 'warm' }, { waterProof: 1 }]
+
                         }                   // Closet.findAll({    
                     }
+
                 } else if (temp < 60 && precip < 40) {
                     condition = {
                         where: {
-                            [Op.and]: [{ temp: 'cold' }, { waterProof: 0 }]
+                            [Op.and]: [{ temp: 'cold' }, { waterProof: 1}]
                         }
                     }
+
                 } else if (temp > 80 && precip < 40) {
-                    condition = {
-                        where: {
-                            [Op.and]: [{ temp: 'hot' }, { waterProof: 0 }]
-                        }
-                    }
-                } else if (temp > 60 && temp < 80 && precip > 40) {
-                    condition = {
-                        where: {
-                            [Op.and]: [{ temp: 'warm' }, { waterProof: 1 }]
-                        }
-                    }
-                } else if (temp < 60 && precip > 40) {
-                    condition = {
-                        where: {
-                            [Op.and]: [{ temp: 'cold' }, { waterProof: 1 }]
-                        }
-                    }
-                } else if (temp > 80 && precip > 40) {
                     condition = {
                         where: {
                             [Op.and]: [{ temp: 'hot' }, { waterProof: 1 }]
                         }
                     }
-                }
 
-                Closets.findAll({
-                    condition,
-                    include: [User]
-                }).then(etc => {
+                } else if (temp > 60 && temp < 80 && precip > 40) {
+                    condition = {
+                        where: {
+                            [Op.and]: [{ temp: 'warm' }, { waterProof: 0 }]
+                        }
+                    }
+
+                } else if (temp < 60 && precip > 40) {
+                    condition = {
+                        where: {
+                            [Op.and]: [{ temp: 'cold' }, { waterProof: 0 }]
+                        }
+                    }
+                } else if (temp > 80 && precip > 40) {
+                    condition = {
+                        where: {
+                            [Op.and]: [{ temp: 'hot' }, { waterProof: 0 }]
+                        }
+                    }
+                }
+                console.log(condition)
+                condition.include = [User]
+                Closets.findAll(
+                    condition
+                ).then(etc => {
                     res.json(etc)
                 });
 
@@ -177,26 +185,26 @@ module.exports = function (app) {
                 console.log(err);
             });
     })
-    
-    app.get("/api/type/:type", function (req,res) {
+
+    app.get("/api/type/:type", function (req, res) {
         Closets.findAll({
             where: {
-              type: req.params.type
+                type: req.params.type
             }, include: [User]
-          }).then(function(results) {
+        }).then(function (results) {
             res.json(results);
-          });
+        });
     });
-   
-    app.get("/api/color/:color", function (req,res) {
+
+    app.get("/api/color/:color", function (req, res) {
         console.log(req.params)
         Closets.findAll({
             where: {
-              color: req.params.color
+                color: req.params.color
             }, include: [User]
-          }).then(function(results) {
+        }).then(function (results) {
             res.json(results);
-          });
+        });
     });
 
 
