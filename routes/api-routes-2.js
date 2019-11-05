@@ -2,7 +2,7 @@ var { User, Closets } = require("../models");
 var axios = require("axios")
 var passport = require("../config/passport");
 var axios = require("axios");
-var Sequelize = require("Sequelize")
+var Sequelize = require("sequelize")
 var Op = Sequelize.Op;
 
 module.exports = function (app) {
