@@ -89,6 +89,7 @@ $(document).ready(function () {
        if (colorSorted.classList.contains("display-none")) {
         colorSorted.classList.remove("display-none");
         typeSorted.classList.add("display-none");
+        weatherSorted.classList.add("display-none");
     } else {
 
     }
@@ -109,6 +110,7 @@ $(document).ready(function () {
         if (typeSorted.classList.contains("display-none")) {
             typeSorted.classList.remove("display-none");
             colorSorted.classList.add("display-none");
+            weatherSorted.classList.add("display-none")
         }
         //  else {
         //     typeSorted.classList.add("display-none");
@@ -122,6 +124,11 @@ $(document).ready(function () {
 
     function sortBYWeather(){
        weatherSorted.innerHTML = '';
+       if (weatherSorted.classList.contains("display-none")) {
+        weatherSorted.classList.remove("display-none");
+        colorSorted.classList.add("display-none");
+        typeSorted.classList.add("display-none")
+    }
         $.get("/api/weather/", function(data){
             $bars.render('weatherSort', 'sort-weather', { allClothes: data });
         });
